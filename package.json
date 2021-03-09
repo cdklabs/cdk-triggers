@@ -2,7 +2,7 @@
   "name": "cdk-triggers",
   "repository": {
     "type": "git",
-    "url": "git@github.com:awslabs/cdk-triggers.git"
+    "url": "https://github.com:awslabs/cdk-triggers.git"
   },
   "scripts": {
     "projen": "npx projen",
