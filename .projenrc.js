@@ -24,6 +24,22 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-sns',
     '@aws-cdk/aws-lambda-nodejs',
   ],
+
+  publishToPypi: {
+    distName: 'cdk-triggers',
+    module: 'cdk_triggers',
+  },
+
+  publishToNuget: {
+    packageId: 'Eladb.CdkTriggers',
+    dotNetNamespace: 'AwsLabs.CdkTriggers',
+  },
+
+  publishToMaven: {
+    mavenGroupId: 'com.github.eladb',
+    mavenArtifactId: 'cdktriggers',
+    javaPackage: 'com.github.awslabs.cdktriggers',
+  },
 });
 
 project.synth();

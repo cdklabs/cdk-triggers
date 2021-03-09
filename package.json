@@ -107,7 +107,23 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "java": {
+        "package": "com.github.awslabs.cdktriggers",
+        "maven": {
+          "groupId": "com.github.eladb",
+          "artifactId": "cdktriggers"
+        }
+      },
+      "python": {
+        "distName": "cdk-triggers",
+        "module": "cdk_triggers"
+      },
+      "dotnet": {
+        "namespace": "AwsLabs.CdkTriggers",
+        "packageId": "Eladb.CdkTriggers"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"
