@@ -6,7 +6,7 @@ const project = new AwsCdkConstructLibrary({
   cdkVersion: '1.92.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-triggers',
-  repositoryUrl: 'https://github.com:awslabs/cdk-triggers.git',
+  repositoryUrl: 'https://github.com/awslabs/cdk-triggers.git',
 
   testdir: 'src/__tests__',
 
