@@ -3,7 +3,7 @@ const { AwsCdkConstructLibrary } = require('projen');
 const project = new AwsCdkConstructLibrary({
   author: 'Amazon Web Services',
   authorAddress: 'aws-cdk-team@amazon.com',
-  cdkVersion: '1.92.0',
+  cdkVersion: '1.95.2',
   defaultReleaseBranch: 'main',
   name: 'cdk-triggers',
   repositoryUrl: 'https://github.com/awslabs/cdk-triggers.git',
