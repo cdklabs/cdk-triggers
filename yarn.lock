@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@aws-cdk/assert@^1.92.0":
+"@aws-cdk/assert@^1.107.0":
   version "1.107.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-1.107.0.tgz#dd4798d1e92414662b38bfd088d65ce9b02a90e1"
   integrity sha512-tV+Nbvb3DOvZpgrLEYFoG4lsMk2zddtPSGDVdWN4A5xaIhYFcnh27+l2//2IuBlV9RSmeLAYPZtJV6Zn7nLegg==
@@ -141,7 +141,7 @@
     "@aws-cdk/cx-api" "1.107.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-lambda-nodejs@^1.92.0":
+"@aws-cdk/aws-lambda-nodejs@^1.107.0":
   version "1.107.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda-nodejs/-/aws-lambda-nodejs-1.107.0.tgz#2616722a55862ff5a5c131a2f94b751e0f77cae9"
   integrity sha512-gJ8tPROserVbmLBFl+3iJ/m8+ZehlUzkuNmP2x8NEdrd5kSfzyorlmRrc/ag31ujNByBKJZV9EyXMZB/pjHHNg==
@@ -150,7 +150,7 @@
     "@aws-cdk/core" "1.107.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-lambda@1.107.0", "@aws-cdk/aws-lambda@^1.92.0":
+"@aws-cdk/aws-lambda@1.107.0", "@aws-cdk/aws-lambda@^1.107.0":
   version "1.107.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda/-/aws-lambda-1.107.0.tgz#6264d932a4fbec04fbd9ddcbdb7ee80dc4c554dc"
   integrity sha512-McoQ3rjFtXDHUaq4ovU/ARwBJgQz3iq2cBogv0zg4g8AMw9doGVZnXjIYNFiCBXCQD1IUAlrLi7YhpXBDnygRA==
@@ -219,7 +219,7 @@
     "@aws-cdk/core" "1.107.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-sns@^1.92.0":
+"@aws-cdk/aws-sns@^1.107.0":
   version "1.107.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sns/-/aws-sns-1.107.0.tgz#524851b4e3351a2984d76d83d1420eb0247ec2e8"
   integrity sha512-EjRmqiP+xNbP3tZDOSOw2CtiZ56liaaFuJhccLOJTtfDKxhNN5reUdjlsU7GbteJt0ssSN2u/iU3jRXOFX8KHQ==
@@ -282,7 +282,7 @@
     string-width "^4.2.2"
     table "^6.7.1"
 
-"@aws-cdk/core@1.107.0", "@aws-cdk/core@^1.92.0":
+"@aws-cdk/core@1.107.0", "@aws-cdk/core@^1.107.0":
   version "1.107.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/core/-/core-1.107.0.tgz#1c88e0b9b8afb185d49c36647d5eb45b32fd0f7f"
   integrity sha512-yE0yU341HZWd7ee0SsMOToqz4xC3PoaDerSklxWWdgw3rgVatwP4pqrml5ZOE+q6vhPseESvNRjfZizKc7xK7w==
@@ -5955,10 +5955,10 @@ progress@^2.0.0, progress@^2.0.3:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-projen@^0.22.8:
-  version "0.22.8"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.22.8.tgz#40997b19a7c807a48aeba010b073950a24d3ce22"
-  integrity sha512-Xb1oaE7JANYTHrc3p8b4NR0MU1jCsEeXkqtMEVcyGE5ufF2eGFZKpHxB3tErzLBPD9PE41g2mvYQ+k9dZ5cxlA==
+projen@^0.22.10:
+  version "0.22.10"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.22.10.tgz#dfe08a2c2da9c65ee0015e369328e1688e0fe1bc"
+  integrity sha512-n/koddZkZ+OfiQct8N5FKfBCWw2dby3McGN8GavBxBExRGRWgHOlq4n3xh6PIfrRghqgR5++hf2cNcHedI32Mw==
   dependencies:
     "@iarna/toml" "^2.2.5"
     chalk "^4.1.1"
