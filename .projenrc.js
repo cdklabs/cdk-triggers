@@ -41,6 +41,11 @@ const project = new AwsCdkConstructLibrary({
     mavenArtifactId: 'cdktriggers',
     javaPackage: 'com.github.awslabs.cdktriggers',
   },
+  autoApproveOptions: {
+    allowedUsernames: ['aws-cdk-automation'],
+    secret: 'GITHUB_TOKEN',
+  },
+  autoApproveUpgrades: true,
 });
 
 project.synth();
