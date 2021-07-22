@@ -25,7 +25,7 @@ export class AfterCreate extends Construct {
 
     const provider = CustomResourceProvider.getOrCreateProvider(this, 'AWSCDK.TriggerCustomResourceProvider', {
       runtime: CustomResourceProviderRuntime.NODEJS_14_X,
-      codeDirectory: join(__dirname, 'handler'),
+      codeDirectory: join(__dirname, '..', 'lambda'),
       policyStatements: [
         {
           Effect: 'Allow',
