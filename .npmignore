@@ -9,11 +9,11 @@
 /coverage
 /dist/changelog.md
 /dist/version.txt
-/lib/__tests__
 /src
-/src/__tests__
+/test
 /test-reports/
 /tsconfig.eslint.json
+/tsconfig.jest.json
 /tsconfig.json
 dist
 junit.xml

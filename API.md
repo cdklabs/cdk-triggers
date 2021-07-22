@@ -34,7 +34,7 @@ new AfterCreate(scope: Construct, id: string, props: AfterCreateProps)
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[AfterCreateProps](#cdk-triggers-aftercreateprops)</code>)  *No description*
-  * **handler** (<code>[IFunction](#aws-cdk-aws-lambda-ifunction)</code>)  The handler to execute once after all the resources are created. 
+  * **handler** (<code>[Function](#aws-cdk-aws-lambda-function)</code>)  The handler to execute once after all the resources are created. 
   * **resources** (<code>Array<[Construct](#aws-cdk-core-construct)></code>)  Resources to trigger on. __*Default*__: [] Run the trigger at any time during stack deployment.
 
 
@@ -49,7 +49,7 @@ new AfterCreate(scope: Construct, id: string, props: AfterCreateProps)
 
 Name | Type | Description 
 -----|------|-------------
-**handler** | <code>[IFunction](#aws-cdk-aws-lambda-ifunction)</code> | The handler to execute once after all the resources are created.
+**handler** | <code>[Function](#aws-cdk-aws-lambda-function)</code> | The handler to execute once after all the resources are created.
 **resources**? | <code>Array<[Construct](#aws-cdk-core-construct)></code> | Resources to trigger on.<br/>__*Default*__: [] Run the trigger at any time during stack deployment.
 
 

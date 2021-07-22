@@ -1,4 +1,5 @@
 const { AwsCdkConstructLibrary } = require('projen');
+const { DependencyType } = require('projen/lib/deps');
 
 const project = new AwsCdkConstructLibrary({
   author: 'Amazon Web Services',
@@ -8,8 +9,6 @@ const project = new AwsCdkConstructLibrary({
   name: 'cdk-triggers',
   projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
   repositoryUrl: 'https://github.com/awslabs/cdk-triggers.git',
-
-  testdir: 'src/__tests__',
 
   cdkDependencies: [
     '@aws-cdk/aws-lambda',
@@ -47,5 +46,8 @@ const project = new AwsCdkConstructLibrary({
   },
   autoApproveUpgrades: true,
 });
+
+project.deps.addDependency('ts-jest@^26', DependencyType.BUILD);
+
 
 project.synth();

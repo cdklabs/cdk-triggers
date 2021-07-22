@@ -3,7 +3,7 @@ import '@aws-cdk/assert/jest';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as sns from '@aws-cdk/aws-sns';
 import { Stack } from '@aws-cdk/core';
-import * as triggers from '../index';
+import * as triggers from '../src';
 
 test('minimal usage', () => {
   // GIVEN
@@ -26,10 +26,7 @@ test('minimal usage', () => {
 
   expect(stack).toHaveResource('Custom::Trigger', {
     HandlerArn: {
-      'Fn::GetAtt': [
-        'MyTriggerHandlerD6B1FF23',
-        'Arn',
-      ],
+      Ref: 'MyTriggerHandlerCurrentVersionC0B6BBD40f3abd954eb77fda7e548d681c7fa667',
     },
   });
 
