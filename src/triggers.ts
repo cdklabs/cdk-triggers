@@ -12,8 +12,11 @@ export interface AfterCreateProps {
 
   /**
    * The handler to execute once after all the resources are created.
+   *
+   * The trigger will be executed every time the handler changes (code or
+   * configuration).
    */
-  readonly handler: lambda.IFunction;
+  readonly handler: lambda.Function;
 }
 
 export class AfterCreate extends Construct {
@@ -36,7 +39,10 @@ export class AfterCreate extends Construct {
       resourceType: 'Custom::Trigger',
       serviceToken: provider.serviceToken,
       properties: {
-        HandlerArn: props.handler.functionArn,
+        // we use 'currentVersion' because a new version is created every time the
+        // handler changes (either code or configuration). this will have the effect
+        // that the trigger will be executed every time the handler is changed.
+        HandlerArn: props.handler.currentVersion.functionArn,
       },
     });
 
