@@ -1,5 +1,6 @@
 {
   "name": "cdk-triggers",
+  "description": "Execute AWS Lambda handlers during deployments of AWS CDK stacks",
   "repository": {
     "type": "git",
     "url": "https://github.com/awslabs/cdk-triggers.git"
