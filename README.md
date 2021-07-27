@@ -1,13 +1,5 @@
 # CDK Triggers
 
-> ## Under Construction
-> We are building this as part of the **CDK Construction
-Zone** Twitch series on [twitch.tv/aws](https://twitch.tv/aws). To Follow up,
-subscribe to the [RFC issue](https://github.com/aws/aws-cdk-rfcs/issues/71) on
-GitHub.
-
----
-
 > The APIs of higher level constructs in this module are experimental and under active development.
 > They are subject to non-backward compatible changes or removal in any future version. These are
 > not subject to the [Semantic Versioning](https://semver.org/) model and breaking changes will be
@@ -17,8 +9,6 @@ GitHub.
 ## Overview
 
 Allow specifying arbitrary handlers which execute as part of the deployment process and trigger them before/after resources or stacks.
-
-
 
 ## Usage
 
