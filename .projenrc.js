@@ -4,6 +4,7 @@ const { DependencyType } = require('projen/lib/deps');
 const project = new AwsCdkConstructLibrary({
   author: 'Amazon Web Services',
   authorAddress: 'aws-cdk-team@amazon.com',
+  description: 'Execute AWS Lambda handlers during deployments of AWS CDK stacks',
   cdkVersion: '1.107.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-triggers',
