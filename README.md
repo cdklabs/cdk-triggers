@@ -12,8 +12,6 @@ Allow specifying arbitrary handlers which execute as part of the deployment proc
 
 ## Usage
 
-> Hypothetical README
-
 You can trigger the execution of arbitrary AWS Lambda functions before or after resources or groups of resources are provisioned using the Triggers API.
 
 The library includes constructs that represent different triggers. The `BeforeCreate` and `AfterCreate` constructs can be used to trigger a handler before/after a set of resources have been created.
@@ -24,8 +22,6 @@ new triggers.AfterCreate(this, 'InvokeAfter', {
   handler: myLambdaFunction,
 });
 ```
-
-Similarly, `triggers.BeforeCreate` can be used to set up a "before" trigger.
 
 Where `resources` is a list of __construct scopes__ which determine when `handler` is invoked. Scopes can be either specific resources or composite constructs (in which case all the resources in the construct will be used as a group). The scope can also be a `Stack`, in which case the trigger will apply to all the resources within the stack (same as any composite construct). All scopes must roll up to the same stack.
 
@@ -48,12 +44,16 @@ new triggers.AfterCreate(this, 'SayHello', {
 });
 ```
 
-## Requirements
+## Additional Notes
 
-* One-off exec before/after resource/s are created (`Trigger.AfterCreate`).
+* If the trigger fails, deployment fails.
+* If the handler changes (configuration or code), the trigger gets re-executed (trigger is bound to `lambda.currentVersion` which gets recreated
+  when the function changes).
+
+## Roadmap
+
 * Additional periodic execution after deployment (`repeatOnSchedule`).
-* Async checks (`retryWithTImeout`)
-* Execute on updates (bind logical ID to hash of CFN properties of triggered resource)
+* Async checks (`retryWithTimeout`)
 * Execute shell command inside a Docker image
 
 ## Use Cases
