@@ -32,19 +32,22 @@ const project = new AwsCdkConstructLibrary({
   },
 
   publishToNuget: {
-    packageId: 'Eladb.CdkTriggers',
-    dotNetNamespace: 'AwsLabs.CdkTriggers',
+    packageId: 'Cdklabs.CdkTriggers',
+    dotNetNamespace: 'Cdklabs.CdkTriggers',
   },
 
   publishToMaven: {
-    mavenGroupId: 'com.github.eladb',
+    mavenGroupId: 'io.github.cdklabs',
+    javaPackage: 'io.github.cdklabs.cdktriggers',
     mavenArtifactId: 'cdktriggers',
-    javaPackage: 'com.github.awslabs.cdktriggers',
+    mavenEndpoint: 'https://s01.oss.sonatype.org',
   },
+
   autoApproveOptions: {
     allowedUsernames: ['aws-cdk-automation'],
     secret: 'GITHUB_TOKEN',
   },
+
   autoApproveUpgrades: true,
 });
 

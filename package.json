@@ -123,9 +123,9 @@
     "outdir": "dist",
     "targets": {
       "java": {
-        "package": "com.github.awslabs.cdktriggers",
+        "package": "io.github.cdklabs.cdktriggers",
         "maven": {
-          "groupId": "com.github.eladb",
+          "groupId": "io.github.cdklabs",
           "artifactId": "cdktriggers"
         }
       },
@@ -134,8 +134,8 @@
         "module": "cdk_triggers"
       },
       "dotnet": {
-        "namespace": "AwsLabs.CdkTriggers",
-        "packageId": "Eladb.CdkTriggers"
+        "namespace": "Cdklabs.CdkTriggers",
+        "packageId": "Cdklabs.CdkTriggers"
       }
     },
     "tsc": {
