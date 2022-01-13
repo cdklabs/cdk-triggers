@@ -19,8 +19,8 @@ Name|Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -31,11 +31,11 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new AfterCreate(scope: Construct, id: string, props: AfterCreateProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[AfterCreateProps](#cdk-triggers-aftercreateprops)</code>)  *No description*
-  * **handler** (<code>[Function](#aws-cdk-aws-lambda-function)</code>)  The handler to execute once after all the resources are created. 
-  * **resources** (<code>Array<[Construct](#aws-cdk-core-construct)></code>)  Resources to trigger on. __*Default*__: [] Run the trigger at any time during stack deployment.
+  * **handler** (<code>[aws_lambda.Function](#aws-cdk-lib-aws-lambda-function)</code>)  The handler to execute once after all the resources are created. 
+  * **resources** (<code>Array<[Construct](#constructs-construct)></code>)  Resources to trigger on. __*Default*__: [] Run the trigger at any time during stack deployment.
 
 
 
@@ -49,8 +49,8 @@ new AfterCreate(scope: Construct, id: string, props: AfterCreateProps)
 
 Name | Type | Description 
 -----|------|-------------
-**handler** | <code>[Function](#aws-cdk-aws-lambda-function)</code> | The handler to execute once after all the resources are created.
-**resources**? | <code>Array<[Construct](#aws-cdk-core-construct)></code> | Resources to trigger on.<br/>__*Default*__: [] Run the trigger at any time during stack deployment.
+**handler** | <code>[aws_lambda.Function](#aws-cdk-lib-aws-lambda-function)</code> | The handler to execute once after all the resources are created.
+**resources**? | <code>Array<[Construct](#constructs-construct)></code> | Resources to trigger on.<br/>__*Default*__: [] Run the trigger at any time during stack deployment.
 
 
 
