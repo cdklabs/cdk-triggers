@@ -1,6 +1,7 @@
 import { join } from 'path';
-import * as lambda from '@aws-cdk/aws-lambda';
-import { Construct, CustomResource, CustomResourceProvider, CustomResourceProviderRuntime } from '@aws-cdk/core';
+import { CustomResource, CustomResourceProvider, CustomResourceProviderRuntime } from 'aws-cdk-lib';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import { Construct } from 'constructs';
 
 export interface AfterCreateProps {
   /**

@@ -1,8 +1,7 @@
-import { ResourcePart, SynthUtils } from '@aws-cdk/assert';
-import '@aws-cdk/assert/jest';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as sns from '@aws-cdk/aws-sns';
-import { Stack } from '@aws-cdk/core';
+import { Stack } from 'aws-cdk-lib';
+import { Match, Template } from 'aws-cdk-lib/assertions';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as sns from 'aws-cdk-lib/aws-sns';
 import * as triggers from '../src';
 
 test('minimal usage', () => {
@@ -22,15 +21,18 @@ test('minimal usage', () => {
   });
 
   // THEN
-  expect(SynthUtils.synthesize(stack).template).toMatchSnapshot();
+  const template = Template.fromStack(stack);
+  expect(template).toMatchSnapshot();
 
-  expect(stack).toHaveResource('Custom::Trigger', {
-    HandlerArn: {
-      Ref: 'MyTriggerHandlerCurrentVersionC0B6BBD40f3abd954eb77fda7e548d681c7fa667',
-    },
-  });
+  expect(template.hasResourceProperties('Custom::Trigger',
+    Match.objectLike({
+      HandlerArn: {
+        Ref: 'MyTriggerHandlerCurrentVersionC0B6BBD40f3abd954eb77fda7e548d681c7fa667',
+      },
+    })));
 
-  expect(stack).toHaveResource('Custom::Trigger', {
-    DependsOn: ['MyTopic86869434'],
-  }, ResourcePart.CompleteDefinition);
+  expect(template.hasResource('Custom::Trigger',
+    Match.objectLike({
+      DependsOn: ['MyTopic86869434'],
+    })));
 });
