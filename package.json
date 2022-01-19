@@ -38,13 +38,13 @@
     "organization": false
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.89",
+    "@types/aws-lambda": "^8.10.90",
     "@types/jest": "^26.0.24",
     "@types/node": "^12",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "aws-cdk-lib": "2.0.0",
-    "aws-sdk": "^2.1058.0",
+    "aws-sdk": "^2.1059.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-import-resolver-node": "^0.3.6",
@@ -57,7 +57,7 @@
     "jsii-docgen": "^1.8.110",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
-    "projen": "^0.50.33",
+    "projen": "^0.51.3",
     "standard-version": "^9",
     "ts-jest": "^26",
     "typescript": "^4.5.4"
