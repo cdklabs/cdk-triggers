@@ -13,7 +13,6 @@
     "compile": "npx projen compile",
     "default": "npx projen default",
     "docgen": "npx projen docgen",
-    "eject": "npx projen eject",
     "eslint": "npx projen eslint",
     "package": "npx projen package",
     "package-all": "npx projen package-all",
@@ -114,7 +113,8 @@
     }
   },
   "types": "lib/index.d.ts",
-  "stability": "stable",
+  "stability": "deprecated",
+  "deprecated": true,
   "jsii": {
     "outdir": "dist",
     "targets": {

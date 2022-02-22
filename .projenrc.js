@@ -9,6 +9,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: 'cdk-triggers',
   projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
   repositoryUrl: 'https://github.com/awslabs/cdk-triggers.git',
+  stability: 'deprecated',
 
   devDeps: [
     'aws-sdk',

@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
-      - name: Install dependencies
+      - title: Install dependencies
         run: yarn install --check-files --frozen-lockfile
       - name: Upgrade dependencies
         run: npx projen upgrade
