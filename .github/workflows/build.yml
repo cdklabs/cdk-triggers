@@ -8,7 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
+    outputs:
+      self_mutation_happened: ${{ steps.self_mutation.outputs.self_mutation_happened }}
     env:
       CI: "true"
     steps:
@@ -19,34 +21,29 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Install dependencies
         run: yarn install --check-files
-      - name: Build
+      - name: build
         run: npx projen build
-      - name: Check for self-mutation
+      - id: self_mutation
+        name: Find mutations
         run: |-
-          mkdir -p dist && touch dist/patch.diff
           git add .
-          if ! git diff --staged --patch --exit-code > patch.diff; then
-            echo -e "\e[93m\e[1mFiles were changed during build (see build log). If this was triggered from a fork, you will need to update your branch.\e[0m"
-            cat patch.diff
-            rm -fr dist && mkdir -p dist
-            mv patch.diff dist
-            exit 1
-          fi
-      - if: always()
-        name: Prepare artifact directory "dist"
-        run: |-
-          if [ ! -e dist ]; then
-            mkdir -p dist
-            touch dist/.empty
-          elif [ ! -d dist ]; then
-            echo "Artifact in "dist" must be a directory"
-            exit 1
-          fi
-      - name: Upload dist
+          git diff --staged --patch --exit-code > .repo.patch || echo "::set-output name=self_mutation_happened::true"
+      - if: steps.self_mutation.outputs.self_mutation_happened
+        name: Upload patch
         uses: actions/upload-artifact@v2
-        if: always()
         with:
-          name: dist
+          name: .repo.patch
+          path: .repo.patch
+      - name: Fail build on mutation
+        if: steps.self_mutation.outputs.self_mutation_happened
+        run: |-
+          echo "::error::Files were changed during build (see build log). If this was triggered from a fork, you will need to update your branch."
+          cat .repo.patch
+          exit 1
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2.1.1
+        with:
+          name: build-artifact
           path: dist
     container:
       image: jsii/superchain:1-buster-slim-node14
@@ -55,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    if: (always()) && (! (github.event.pull_request.head.repo.full_name != github.repository))
+    if: always() && needs.build.outputs.self_mutation_happened && !(github.event.pull_request.head.repo.full_name != github.repository)
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -63,59 +60,49 @@ jobs:
           token: ${{ secrets.PROJEN_GITHUB_TOKEN }}
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - name: Download dist
+      - name: Download patch
         uses: actions/download-artifact@v2
         with:
-          name: dist
-          path: dist
-      - name: Skip if there was no self-mutation
-        run: "[ -s ./dist/patch.diff ] || exit 0"
-      - name: Apply self-mutation
-        run: |-
-          git apply ./dist/patch.diff
-          rm -rf ./dist
-      - name: Commit changes
+          name: .repo.patch
+          path: ${{ runner.temp }}
+      - name: Apply patch
+        run: '[ -s ${{ runner.temp }}/.repo.patch ] && git apply ${{ runner.temp }}/.repo.patch || echo "Empty patch. Skipping."'
+      - name: Set git identity
         run: |-
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add .
-          git commit -s -m "chore: self mutation"
       - name: Push changes
-        run: git push origin HEAD:${{ github.event.pull_request.head.ref }}
+        run: |2-
+            git add .
+            git commit -s -m "chore: self mutation"
+            git push origin HEAD:${{ github.event.pull_request.head.ref }}
   package-js:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: {}
+    if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: Download dist
+      - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
-      - name: Download dist
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name: Skip if self-mutation happened
-        run: "[ -s ./dist/patch.diff ] && exit 0"
-      - name: Prepare repository
+      - name: Prepare Repository
         run: mv dist .repo
-      - name: Install dependencies
-        run: (cd .repo && yarn install --check-files --frozen-lockfile)
-      - name: Package for js
-        run: (cd .repo && npx projen package:js)
-      - name: Extract build artifacts
+      - name: Install Dependencies
+        run: cd .repo && yarn install --check-files --frozen-lockfile
+      - name: Create js artifact
+        run: cd .repo && npx projen package:js
+      - name: Collect js Artifact
         run: mv .repo/dist dist
   package-java:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: {}
+    if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-java@v2
         with:
@@ -124,31 +111,24 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: Download dist
+      - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
-      - name: Download dist
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name: Skip if self-mutation happened
-        run: "[ -s ./dist/patch.diff ] && exit 0"
-      - name: Prepare repository
+      - name: Prepare Repository
         run: mv dist .repo
-      - name: Install dependencies
-        run: (cd .repo && yarn install --check-files --frozen-lockfile)
-      - name: Package for java
-        run: (cd .repo && npx projen package:java)
-      - name: Extract build artifacts
+      - name: Install Dependencies
+        run: cd .repo && yarn install --check-files --frozen-lockfile
+      - name: Create java artifact
+        run: cd .repo && npx projen package:java
+      - name: Collect java Artifact
         run: mv .repo/dist dist
   package-python:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: {}
+    if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-node@v2
         with:
@@ -156,31 +136,24 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
-      - name: Download dist
+      - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
-      - name: Download dist
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name: Skip if self-mutation happened
-        run: "[ -s ./dist/patch.diff ] && exit 0"
-      - name: Prepare repository
+      - name: Prepare Repository
         run: mv dist .repo
-      - name: Install dependencies
-        run: (cd .repo && yarn install --check-files --frozen-lockfile)
-      - name: Package for python
-        run: (cd .repo && npx projen package:python)
-      - name: Extract build artifacts
+      - name: Install Dependencies
+        run: cd .repo && yarn install --check-files --frozen-lockfile
+      - name: Create python artifact
+        run: cd .repo && npx projen package:python
+      - name: Collect python Artifact
         run: mv .repo/dist dist
   package-dotnet:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: {}
+    if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-node@v2
         with:
@@ -188,23 +161,16 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.x
-      - name: Download dist
+      - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
-      - name: Download dist
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name: Skip if self-mutation happened
-        run: "[ -s ./dist/patch.diff ] && exit 0"
-      - name: Prepare repository
+      - name: Prepare Repository
         run: mv dist .repo
-      - name: Install dependencies
-        run: (cd .repo && yarn install --check-files --frozen-lockfile)
-      - name: Package for dotnet
-        run: (cd .repo && npx projen package:dotnet)
-      - name: Extract build artifacts
+      - name: Install Dependencies
+        run: cd .repo && yarn install --check-files --frozen-lockfile
+      - name: Create dotnet artifact
+        run: cd .repo && npx projen package:dotnet
+      - name: Collect dotnet Artifact
         run: mv .repo/dist dist
