@@ -556,7 +556,7 @@
     chalk "^4.1.2"
     semver "^7.3.5"
 
-"@jsii/spec@^1.30.0", "@jsii/spec@^1.54.0":
+"@jsii/spec@^1.54.0":
   version "1.54.0"
   resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.54.0.tgz#4d03e8386a81b5db0e292a5ff3df6b265ba5ad07"
   integrity sha512-IOspxWPC26+Re6DNJvaxCEkG1BYByiGSPlRxQpIpts+Hx2EZgAvuG+8rQoryNt7JqaAKpcJ6W3OdRmSw3x5Yrg==
@@ -4089,17 +4089,7 @@ jsii-diff@^1.54.0:
     typescript "~3.9.10"
     yargs "^16.2.0"
 
-jsii-docgen@^1.8.110:
-  version "1.8.110"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.8.110.tgz#83c829864db993a9479531b43e8dcb2288803c1f"
-  integrity sha512-xl/A8lpOfRzG7KQqHDkWf3bveR3b0hM91CG1/eHLSpBJpvsEvCS97JkOpcCp16XEiTHrHMrnILZPPGWneFUncw==
-  dependencies:
-    "@jsii/spec" "^1.30.0"
-    fs-extra "^9.1.0"
-    jsii-reflect "^1.30.0"
-    yargs "^16.2.0"
-
-jsii-reflect@^1.30.0, jsii-reflect@^1.54.0:
+jsii-reflect@^1.54.0:
   version "1.54.0"
   resolved "https://registry.yarnpkg.com/jsii-reflect/-/jsii-reflect-1.54.0.tgz#fda7e812d460e062f699d17dc166c5398b147b17"
   integrity sha512-wB4hxHTAN4LEBVg/Y5sr3Sbh3Xe2+jrYIftnhT+2mmhMexHj3U0RhjPW/MFXxRTbiSgDad1fbw5VkJYDWnpGXw==

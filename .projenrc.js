@@ -10,6 +10,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
   repositoryUrl: 'https://github.com/awslabs/cdk-triggers.git',
   stability: 'deprecated',
+  docgen: false, // jsii-docgen fails if a package is deprecated
 
   devDeps: [
     'aws-sdk',
